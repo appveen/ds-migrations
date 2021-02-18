@@ -1,0 +1,46 @@
+odpConfig -> datastackConfig
+---------------------------------
+Apps to be created manually
+Donot backup B2B, PM and SM logs
+
+mongorestore -h localhost:27017 -d datastackConfig --drop odpConfig/counters.bson
+mongorestore -h localhost:27017 -d datastackConfig --drop odpConfig/globalSchema.bson
+
+mongorestore -h localhost:27017 -d datastackConfig --drop odpConfig/userMgmt.filter.bson
+mongorestore -h localhost:27017 -d datastackConfig --drop odpConfig/userMgmt.groups.bson
+mongorestore -h localhost:27017 -d datastackConfig --drop odpConfig/userMgmt.preferences.bson
+mongorestore -h localhost:27017 -d datastackConfig --drop odpConfig/userMgmt.roles.bson
+mongorestore -h localhost:27017 -d datastackConfig odpConfig/userMgmt.users.bson
+
+
+mongorestore -h localhost:27017 -d datastackConfig --drop odpConfig/services.bson
+
+
+{
+  Documentation: { SRVC2053: [ 'dateOfBirth', 'dateOfExpiry' ] },
+  ODP: {
+    SRVC2000: [ 'plannedReleaseDate' ],
+    SRVC2003: [ 'from', 'to' ],
+    SRVC2004: [ 'hotfixReleaseDate', 'eta' ],
+    SRVC2009: [ 'releasedOn' ],
+    SRVC2005: [ 'eta', 'sprintClosureDate' ],
+    SRVC2007: [ 'startTime', 'endTime' ],
+    SRVC2008: [ 'date' ],
+    SRVC2011: [ 'endDate' ]
+  },
+  Ops: { SRVC2052: [ 'endDate' ] },
+  Overread: {
+    SRVC2033: [ 'dateOfBirth' ],
+    SRVC2036: [ 'dateOfBirth' ],
+    SRVC2037: [ 'couponExpiry' ],
+    SRVC2038: [ 'caseReviewedOn' ],
+    SRVC2039: [ 'dateTime' ]
+  },
+  XCRO: {
+    SRVC2022: [ 'targetDate', 'releaseDate', 'etaByDeveloper' ],
+    SRVC2026: [ 'eta' ],
+    SRVC2027: [ 'from', 'to' ],
+    SRVC2019: [ 'plannedReleaseDate' ],
+    SRVC2020: [ 'eta', 'releaseDate' ]
+  }
+}
