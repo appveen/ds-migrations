@@ -50,3 +50,4 @@ Thumbs.db
 
 send.sh
 clean.sh
+mongoCollectionMigration

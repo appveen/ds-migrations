@@ -39,7 +39,7 @@ function convert(definition) {
         }
         defList.push(def);
     });
-    defList[0]["type"] = "String"
+    if(defList[0].properties.dataKey == "_id") defList[0]["type"] = "String"
     return defList;
 }
 
@@ -98,7 +98,7 @@ async function init() {
 	} catch (_err) {
 		console.log(_err.message)
 	}
-	await client.close()
+	// await client.close()
 }
 
 init()

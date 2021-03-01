@@ -5,7 +5,6 @@ let fileName = `odpTodataStackMigration_${d}.log`
 module.exports = {
 	"MONGO_AUTHOR_URL": process.env.MONGO_AUTHOR_URL || "mongodb://localhost:27017",
 	"MONGO_AUTHOR_DBNAME": process.env.MONGO_AUTHOR_DBNAME || "datastackConfig",
-	"ODP_MONGO_AUTHOR_DBNAME": process.env.ODP_MONGO_AUTHOR_DBNAME || "odpConfig",
 	"logging": {
 		"loglevel": process.env.LOG_LEVEL || "info",
 		"options": {

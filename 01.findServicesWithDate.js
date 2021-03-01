@@ -130,7 +130,7 @@ async function init() {
 	} catch (_err) {
 		console.log(_err.message)
 	}
-	await client.close()
+	// await client.close()
 }
 
 init()
