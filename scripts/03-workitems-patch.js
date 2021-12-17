@@ -2,7 +2,8 @@ const log4js = require('log4js');
 const { MongoClient } = require('mongodb');
 
 
-const MONGODB_URL = process.env.MONGODB_URL;
+const MONGODB_AUTHOR_URL = process.env.MONGODB_AUTHOR_URL;
+const MONGODB_APPCENTER_URL = process.env.MONGODB_APPCENTER_URL;
 const CONFIG_DB = process.env.CONFIG_DB;
 const NAMESPACE = process.env.NAMESPACE;
 
@@ -15,15 +16,17 @@ const logger = log4js.getLogger('03-workitems-patch');
 
 
 async function execute() {
-    let client;
+    let configClient;
+    let dataClient;
     try {
-        client = await MongoClient.connect(MONGODB_URL, global.mongoConfig);
-        const serviceCol = client.db(CONFIG_DB).collection('services');
+        configClient = await MongoClient.connect(MONGODB_AUTHOR_URL, global.mongoConfig);
+        dataClient = await MongoClient.connect(MONGODB_APPCENTER_URL, global.mongoConfig);
+        const serviceCol = configClient.db(CONFIG_DB).collection('services');
 
         let services = await serviceCol.find({ 'workflowConfig.enabled': true }).toArray();
         let promises = services.map(async (doc) => {
             try {
-                const workflowCol = client.db(`${NAMESPACE}-${doc.app}`).collection(`${doc.collectionName}.workflow`);
+                const workflowCol = dataClient.db(`${NAMESPACE}-${doc.app}`).collection(`${doc.collectionName}.workflow`);
                 const stats = await workflowCol.updateMany({}, { $set: { checkerStep: 'Reviewer' } });
                 console.log(stats);
                 const docs = await workflowCol.find({ 'audit.action': 'Approved' }).toArray();
@@ -49,7 +52,8 @@ async function execute() {
         logger.error(err);
         process.exit(0);
     } finally {
-        client.close();
+        configClient.close();
+        dataClient.close();
     }
 }
 

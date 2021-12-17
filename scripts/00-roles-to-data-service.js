@@ -1,10 +1,8 @@
-const { writeFileSync } = require('fs');
-const { join } = require('path');
 const log4js = require('log4js');
 const { MongoClient } = require('mongodb');
 
 
-const MONGODB_URL = process.env.MONGODB_URL;
+const MONGODB_AUTHOR_URL = process.env.MONGODB_AUTHOR_URL;
 const CONFIG_DB = process.env.CONFIG_DB;
 
 log4js.configure({
@@ -18,7 +16,7 @@ const logger = log4js.getLogger('00-roles-to-data-service');
 async function execute() {
     let client;
     try {
-        client = await MongoClient.connect(MONGODB_URL, global.mongoConfig);
+        client = await MongoClient.connect(MONGODB_AUTHOR_URL, global.mongoConfig);
         const serviceCol = client.db(CONFIG_DB).collection('services');
         const roleCol = client.db(CONFIG_DB).collection('userMgmt.roles');
 

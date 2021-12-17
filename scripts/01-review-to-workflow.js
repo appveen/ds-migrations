@@ -6,7 +6,7 @@ const { MongoClient } = require('mongodb');
 const { rand } = require('../utils');
 
 
-const MONGODB_URL = process.env.MONGODB_URL;
+const MONGODB_AUTHOR_URL = process.env.MONGODB_AUTHOR_URL;
 const CONFIG_DB = process.env.CONFIG_DB;
 
 log4js.configure({
@@ -22,7 +22,7 @@ const oldPermissionIds = [];
 async function execute() {
     let client;
     try {
-        client = await MongoClient.connect(MONGODB_URL, global.mongoConfig);
+        client = await MongoClient.connect(MONGODB_AUTHOR_URL, global.mongoConfig);
         const serviceCol = client.db(CONFIG_DB).collection('services');
         const groupCol = client.db(CONFIG_DB).collection('userMgmt.groups');
         // const roleCol = client.db(CONFIG_DB).collection('userMgmt.roles');
