@@ -8,13 +8,9 @@ require('dotenv').config();
         connectTimeoutMS: 120000
     };
 
-    await require('./scripts/00-roles-to-data-service').execute();
+    await require('./scripts/00-decrypt-using-keys').execute();
     console.log('Script-00 Finished');
-    await require('./scripts/01-review-to-workflow').execute();
+    await require('./scripts/01-encrypt-using-password').execute();
     console.log('Script-01 Finished');
-    await require('./scripts/02-skip-review-to-admin').execute();
-    console.log('Script-02 Finished');
-    await require('./scripts/03-workitems-patch').execute();
-    console.log('Script-03 Finished');
 })();
 
