@@ -31,8 +31,8 @@ async function execute() {
         const decryptedKeys = [];
         keys.forEach(async (doc) => {
             try {
-                doc.certificate = cryptUtils.decrypt(doc.certificate, BASE_KEY);
-                doc.key = cryptUtils.decrypt(doc.key, BASE_KEY);
+                doc.certificate = cryptUtils.decryptUsingPrivateKey(doc.certificate, BASE_KEY);
+                doc.key = cryptUtils.decryptUsingPrivateKey(doc.key, BASE_KEY);
                 decryptedKeys.push(doc);
             } catch (err) {
                 logger.error(err);

@@ -36,7 +36,8 @@ async function execute() {
                 logger.error(err);
             }
         });
-        await Promise.all(promises);
+        promises = await Promise.all(promises);
+        writeFileSync(path.join(process.cwd(), 'data', 'keys.json'), JSON.stringify(promises));
     } catch (err) {
         logger.error(err);
         process.exit(0);

@@ -13,7 +13,7 @@ function rand(index) {
 
 
 
-function encrypt(text, key) {
+function encryptUsingPublicKey(text, key) {
     let iv = crypto.randomBytes(IV_LENGTH);
     let cipher = crypto.createCipheriv(ALGORITHIM, Buffer.from(SECRET), iv);
     let encrypted = cipher.update(text);
@@ -23,7 +23,7 @@ function encrypt(text, key) {
     return initializationVector.toString('hex') + ':' + encrypted.toString('hex');
 };
 
-function decrypt(text, key) {
+function decryptUsingPrivateKey(text, key) {
     let textParts = text.split(':');
     let initializationVector = Buffer.from(textParts.shift(), 'hex');
     let iv = crypto.privateDecrypt(key, initializationVector);
@@ -34,7 +34,37 @@ function decrypt(text, key) {
     return decrypted.toString();
 };
 
+function encrypt(plainText, secret) {
+    const key = crypto.createHash('sha256').update(String(secret)).digest('base64').substring(0, 32);
+    const iv = crypto.randomBytes(IV_LENGTH);
+    const cipher = crypto.createCipheriv(ALGORITHIM, key, iv);
+    let cipherText;
+    try {
+        cipherText = cipher.update(plainText, 'utf8', 'hex');
+        cipherText += cipher.final('hex');
+        cipherText = iv.toString('hex') + cipherText
+    } catch (e) {
+        cipherText = null;
+    }
+    return cipherText;
+}
+
+
+function decrypt(cipherText, secret) {
+    const key = crypto.createHash('sha256').update(String(secret)).digest('base64').substring(0, 32);
+    const contents = Buffer.from(cipherText, 'hex');
+    const iv = contents.slice(0, IV_LENGTH);
+    const textBytes = contents.slice(IV_LENGTH);
+
+    const decipher = crypto.createDecipheriv(ALGORITHIM, key, iv);
+    let decrypted = decipher.update(textBytes, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    return decrypted;
+}
+
 
 module.exports.rand = rand;
 module.exports.encrypt = encrypt;
 module.exports.decrypt = decrypt;
+module.exports.encryptUsingPublicKey = encryptUsingPublicKey;
+module.exports.decryptUsingPrivateKey = decryptUsingPrivateKey;
