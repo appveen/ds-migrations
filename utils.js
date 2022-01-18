@@ -42,7 +42,7 @@ function encrypt(plainText, secret) {
     try {
         cipherText = cipher.update(plainText, 'utf8', 'hex');
         cipherText += cipher.final('hex');
-        cipherText = iv.toString('hex') + cipherText
+        cipherText = iv.toString('hex') + ':' + cipherText
     } catch (e) {
         cipherText = null;
     }
@@ -52,10 +52,8 @@ function encrypt(plainText, secret) {
 
 function decrypt(cipherText, secret) {
     const key = crypto.createHash('sha256').update(String(secret)).digest('base64').substring(0, 32);
-    const contents = Buffer.from(cipherText, 'hex');
-    const iv = contents.slice(0, IV_LENGTH);
-    const textBytes = contents.slice(IV_LENGTH);
-
+    const iv = Buffer.from(cipherText.split(':')[0], 'hex');
+    const textBytes = cipherText.split(':')[1];
     const decipher = crypto.createDecipheriv(ALGORITHIM, key, iv);
     let decrypted = decipher.update(textBytes, 'hex', 'utf8');
     decrypted += decipher.final('utf8');
