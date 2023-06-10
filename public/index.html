@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <base href="/migration/"> -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/my-style.css">
+    <title>ODP to Data Stack Migration</title>
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>
+</head>
+
+<body>
+    <nav class="navbar bg-dark">
+        <div class="container-fluid d-flex align-items-center">
+            <div class="logo-wrapper">
+                <img class="logo" src="img/DataNimbus_Logo_Blue.svg" alt="Logo">
+            </div>
+            <h5 class="navbar-brand text-white m-0">Migration UI</h5>
+        </div>
+    </nav>
+    <div class="container py-4">
+        <div class="form-wrapper">
+            <div class="mb-3 d-flex align-items-center justify-content-between">
+                <label for="securityKeys">Security Keys</label>
+                <button id="securityKeys" type="button" class="btn btn-success">Trigger</button>
+            </div>
+            <div id="securityKeysProgress" class="progress mb-3">
+                <div class="progress-bar progress-bar-striped progress-bar-animated"></div>
+            </div>
+            <pre id="securityKeysLogs" class="border bg-light p-2">
+                <!-- <iframe src="api/migrate/securityKeys/log" frameborder="1"></iframe> -->
+            </pre>
+            <div class="mb-3 d-flex align-items-center justify-content-between">
+                <label for="dataService">Data Services</label>
+                <button id="dataService" type="button" class="btn btn-success">Trigger</button>
+            </div>
+            <div id="dataServiceProgress" class="progress mb-3">
+                <div class="progress-bar progress-bar-striped progress-bar-animated"></div>
+            </div>
+            <div class="mb-3 d-flex align-items-center justify-content-between">
+                <label for="libraries">Libraries</label>
+                <button id="libraries" type="button" class="btn btn-success">Trigger</button>
+            </div>
+            <div id="librariesProgress" class="progress mb-3">
+                <div class="progress-bar progress-bar-striped progress-bar-animated"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (async () => {
+            $('#securityKeysProgress').hide();
+            $('#dataServiceProgress').hide();
+            $('#librariesProgress').hide();
+            $('#securityKeysLogs').hide();
+            $("#securityKeys").on('click', function (ev) {
+                $("#securityKeys").prop('disabled', true);
+                $('#securityKeysLogs').show();
+                $('#securityKeysProgress').show();
+                let intVal2 = setInterval(function () {
+                    $("#securityKeysLogs").load('api/migrate/securityKeys/log');
+                }, 200);
+                $('#securityKeysProgress .progress-bar').width('0%');
+                let count = 0;
+                let intVal = setInterval(() => {
+                    count++;
+                    $('#securityKeysProgress .progress-bar').width((count * 5) + '%');
+                }, 500);
+                $.ajax({
+                    url: 'api/migrate/securityKeys',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({}),
+                    success: function (data, status) {
+                        console.log(data, status);
+                        $("#securityKeys").prop('disabled', false);
+                        $('#securityKeysProgress .progress-bar').width('100%');
+                        clearInterval(intVal);
+                        setTimeout(() => {
+                            clearInterval(intVal2);
+                        }, 1000);
+                        // $('#securityKeysProgress').hide(200);
+                    },
+                    error: function (res, status) {
+                        console.log(res, status);
+                        $("#securityKeys").prop('disabled', false);
+                        $('#securityKeysProgress').hide(200);
+                        clearInterval(intVal);
+                        setTimeout(() => {
+                            clearInterval(intVal2);
+                        }, 1000);
+                        // $('#securityKeysProgress .progress-bar').width('100%');
+                    }
+                })
+            });
+            $("#dataService").on('click', function (ev) {
+                $("#dataService").prop('disabled', true);
+                $('#dataServiceProgress').show();
+                $('#dataServiceProgress .progress-bar').width('0%');
+                let count = 0;
+                let intVal = setInterval(() => {
+                    count++;
+                    $('#dataServiceProgress .progress-bar').width((count * 5) + '%');
+                }, 200);
+                $.ajax({
+                    url: 'api/migrate/dataService',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({}),
+                    success: function (data, status) {
+                        console.log(data, status);
+                        $("#dataService").prop('disabled', false);
+                        $('#dataServiceProgress .progress-bar').width('100%');
+                        clearInterval(intVal);
+                        // $('#dataServiceProgress').hide(200);
+                    },
+                    error: function (res, status) {
+                        console.log(res, status);
+                        $("#dataService").prop('disabled', false);
+                        $('#dataServiceProgress').hide(200);
+                        clearInterval(intVal);
+                        // $('#dataServiceProgress .progress-bar').width('100%');
+                    }
+                })
+            });
+            $("#libraries").on('click', function (ev) {
+                $("#libraries").prop('disabled', true);
+                $('#librariesProgress').show();
+                $('#librariesProgress .progress-bar').width('0%');
+                let count = 0;
+                let intVal = setInterval(() => {
+                    count++;
+                    $('#librariesProgress .progress-bar').width((count * 5) + '%');
+                }, 200);
+                $.ajax({
+                    url: 'api/migrate/libraries',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({}),
+                    success: function (data, status) {
+                        console.log(data, status);
+                        $("#libraries").prop('disabled', false);
+                        $('#librariesProgress .progress-bar').width('100%');
+                        clearInterval(intVal);
+                        // $('#librariesProgress').hide(200);
+                    },
+                    error: function (res, status) {
+                        console.log(res, status);
+                        $("#libraries").prop('disabled', false);
+                        $('#librariesProgress').hide(200);
+                        clearInterval(intVal);
+                        // $('#librariesProgress .progress-bar').width('100%');
+                    }
+                })
+            });
+        })();
+    </script>
+</body>
+
+</html>

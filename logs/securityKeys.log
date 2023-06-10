@@ -1,0 +1,360 @@
+[2023-06-09T16:07:17.968] [INFO] securityKeys - Connected to DB
+[2023-06-09T16:07:17.968] [INFO] securityKeys - Fetching keys from DB
+[2023-06-09T16:07:18.166] [INFO] securityKeys - keys found:  22
+[2023-06-09T16:07:18.166] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.166] [INFO] securityKeys - Running Migration for Document:  EN1001 OEL
+[2023-06-09T16:07:18.166] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.174] [ERROR] securityKeys - Error Occured for  EN1001 OEL
+[2023-06-09T16:07:18.174] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.174] [ERROR] securityKeys - Migration of EN1001 Failed!
+[2023-06-09T16:07:18.174] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.174] [INFO] securityKeys - Running Migration for Document:  EN1002 OEL1
+[2023-06-09T16:07:18.174] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.180] [ERROR] securityKeys - Error Occured for  EN1002 OEL1
+[2023-06-09T16:07:18.180] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.180] [ERROR] securityKeys - Migration of EN1002 Failed!
+[2023-06-09T16:07:18.180] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.180] [INFO] securityKeys - Running Migration for Document:  EN1003 OneExideLife
+[2023-06-09T16:07:18.181] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.187] [ERROR] securityKeys - Error Occured for  EN1003 OneExideLife
+[2023-06-09T16:07:18.187] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.187] [ERROR] securityKeys - Migration of EN1003 Failed!
+[2023-06-09T16:07:18.187] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.187] [INFO] securityKeys - Running Migration for Document:  EN1004 OELSecurity
+[2023-06-09T16:07:18.187] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.195] [ERROR] securityKeys - Error Occured for  EN1004 OELSecurity
+[2023-06-09T16:07:18.195] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.195] [ERROR] securityKeys - Migration of EN1004 Failed!
+[2023-06-09T16:07:18.195] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.195] [INFO] securityKeys - Running Migration for Document:  EN1005 test-app
+[2023-06-09T16:07:18.195] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.202] [ERROR] securityKeys - Error Occured for  EN1005 test-app
+[2023-06-09T16:07:18.202] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.202] [ERROR] securityKeys - Migration of EN1005 Failed!
+[2023-06-09T16:07:18.202] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.202] [INFO] securityKeys - Running Migration for Document:  EN1006 testODP
+[2023-06-09T16:07:18.202] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.208] [ERROR] securityKeys - Error Occured for  EN1006 testODP
+[2023-06-09T16:07:18.208] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.210] [ERROR] securityKeys - Migration of EN1006 Failed!
+[2023-06-09T16:07:18.210] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.210] [INFO] securityKeys - Running Migration for Document:  EN1007 ImportExport
+[2023-06-09T16:07:18.210] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.223] [ERROR] securityKeys - Error Occured for  EN1007 ImportExport
+[2023-06-09T16:07:18.223] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.224] [ERROR] securityKeys - Migration of EN1007 Failed!
+[2023-06-09T16:07:18.224] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.224] [INFO] securityKeys - Running Migration for Document:  EN1008 testApp
+[2023-06-09T16:07:18.224] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.232] [ERROR] securityKeys - Error Occured for  EN1008 testApp
+[2023-06-09T16:07:18.232] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.232] [ERROR] securityKeys - Migration of EN1008 Failed!
+[2023-06-09T16:07:18.232] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.232] [INFO] securityKeys - Running Migration for Document:  EN1009 importExport
+[2023-06-09T16:07:18.233] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.239] [ERROR] securityKeys - Error Occured for  EN1009 importExport
+[2023-06-09T16:07:18.239] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.239] [ERROR] securityKeys - Migration of EN1009 Failed!
+[2023-06-09T16:07:18.239] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.239] [INFO] securityKeys - Running Migration for Document:  EN1010 one
+[2023-06-09T16:07:18.239] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.245] [ERROR] securityKeys - Error Occured for  EN1010 one
+[2023-06-09T16:07:18.245] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.245] [ERROR] securityKeys - Migration of EN1010 Failed!
+[2023-06-09T16:07:18.245] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.245] [INFO] securityKeys - Running Migration for Document:  EN1011 teststs
+[2023-06-09T16:07:18.245] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.250] [ERROR] securityKeys - Error Occured for  EN1011 teststs
+[2023-06-09T16:07:18.250] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.250] [ERROR] securityKeys - Migration of EN1011 Failed!
+[2023-06-09T16:07:18.251] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.251] [INFO] securityKeys - Running Migration for Document:  EN1012 test
+[2023-06-09T16:07:18.251] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.258] [ERROR] securityKeys - Error Occured for  EN1012 test
+[2023-06-09T16:07:18.258] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.258] [ERROR] securityKeys - Migration of EN1012 Failed!
+[2023-06-09T16:07:18.258] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.258] [INFO] securityKeys - Running Migration for Document:  EN1013 TEST
+[2023-06-09T16:07:18.258] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.264] [ERROR] securityKeys - Error Occured for  EN1013 TEST
+[2023-06-09T16:07:18.264] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.264] [ERROR] securityKeys - Migration of EN1013 Failed!
+[2023-06-09T16:07:18.264] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.264] [INFO] securityKeys - Running Migration for Document:  EN1014 TEstAPP
+[2023-06-09T16:07:18.264] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.269] [ERROR] securityKeys - Error Occured for  EN1014 TEstAPP
+[2023-06-09T16:07:18.269] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.269] [ERROR] securityKeys - Migration of EN1014 Failed!
+[2023-06-09T16:07:18.269] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.269] [INFO] securityKeys - Running Migration for Document:  EN1015 ajkghkasd
+[2023-06-09T16:07:18.269] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.274] [ERROR] securityKeys - Error Occured for  EN1015 ajkghkasd
+[2023-06-09T16:07:18.274] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.274] [ERROR] securityKeys - Migration of EN1015 Failed!
+[2023-06-09T16:07:18.274] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.274] [INFO] securityKeys - Running Migration for Document:  EN1016 Sprint
+[2023-06-09T16:07:18.274] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.280] [ERROR] securityKeys - Error Occured for  EN1016 Sprint
+[2023-06-09T16:07:18.280] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.280] [ERROR] securityKeys - Migration of EN1016 Failed!
+[2023-06-09T16:07:18.280] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.280] [INFO] securityKeys - Running Migration for Document:  EN1017 WatsappBot
+[2023-06-09T16:07:18.280] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.285] [ERROR] securityKeys - Error Occured for  EN1017 WatsappBot
+[2023-06-09T16:07:18.285] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.285] [ERROR] securityKeys - Migration of EN1017 Failed!
+[2023-06-09T16:07:18.285] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.285] [INFO] securityKeys - Running Migration for Document:  EN1018 CreditLife
+[2023-06-09T16:07:18.286] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.295] [ERROR] securityKeys - Error Occured for  EN1018 CreditLife
+[2023-06-09T16:07:18.295] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.295] [ERROR] securityKeys - Migration of EN1018 Failed!
+[2023-06-09T16:07:18.295] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.295] [INFO] securityKeys - Running Migration for Document:  EN1019 GroupExide-OEL
+[2023-06-09T16:07:18.295] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.303] [ERROR] securityKeys - Error Occured for  EN1019 GroupExide-OEL
+[2023-06-09T16:07:18.303] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.303] [ERROR] securityKeys - Migration of EN1019 Failed!
+[2023-06-09T16:07:18.303] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.304] [INFO] securityKeys - Running Migration for Document:  EN1020 test10
+[2023-06-09T16:07:18.304] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.311] [ERROR] securityKeys - Error Occured for  EN1020 test10
+[2023-06-09T16:07:18.311] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.311] [ERROR] securityKeys - Migration of EN1020 Failed!
+[2023-06-09T16:07:18.311] [INFO] securityKeys - ====================================================
+[2023-06-09T16:07:18.311] [INFO] securityKeys - Running Migration for Document:  EN1021 Jerrysample
+[2023-06-09T16:07:18.311] [INFO] securityKeys - Trying to Decrypt Certificate
+[2023-06-09T16:07:18.318] [ERROR] securityKeys - Error Occured for  EN1021 Jerrysample
+[2023-06-09T16:07:18.318] [ERROR] securityKeys - Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.decrypt (/Users/jugnu_1/Workspace/tools/sec-migration/cipher.utils.js:10:29)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:35:52
+    at Array.reduce (<anonymous>)
+    at /Users/jugnu_1/Workspace/tools/sec-migration/router.js:30:20
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+[2023-06-09T16:07:18.318] [ERROR] securityKeys - Migration of EN1021 Failed!

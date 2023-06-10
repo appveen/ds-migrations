@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: migration
+  namespace: __namespace__
+spec:
+  type: ClusterIP
+  selector:
+    app: migration
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: migration
+  namespace: __namespace__
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: migration
+  template:
+    metadata:
+      labels:
+        app: migration
+    spec:
+      volumes:
+        - name: odp-sec
+          secret:
+            secretName: odp-sec
+      containers:
+        - name: migration
+          image: "appveen/odp-ds-migration:1.0.0"
+          ports:
+            - containerPort: 10007
+          volumeMounts:
+            - name: odp-sec
+              mountPath: "/opt/keys"
+              readOnly: true
+          env:
+            - name: ODP_KEY
+              value: "/opt/keys/odp.keys"
+            - name: ODP_CRT
+              value: "/opt/keys/odp.crt"
+          envFrom:
+            - configMapRef:
+                name: config
