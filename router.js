@@ -76,7 +76,9 @@ router.post('/migrate/securityKeys', async (req, res) => {
         });
     }
 });
-
+router.get('/migrate/dataService/log', async (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'logs', 'dataService.log'));
+});
 router.post('/migrate/dataService', async (req, res) => {
     try {
         fs.writeFileSync(path.join(process.cwd(), 'logs', 'dataService.log'), '');
