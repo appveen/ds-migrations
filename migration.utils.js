@@ -63,7 +63,6 @@ function enrichSchema(schema) {
 }
 
 
-
 module.exports = {
     checkKeyAndCert,
     convertDefinition,
