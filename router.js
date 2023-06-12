@@ -108,6 +108,14 @@ router.post('/migrate/dataService', async (req, res) => {
                         SKIP_REVIEW_LIST.push({ serviceId: temp._id, skipPermId: skipReviewRole.id });
                     }
                     role.roles = role.roles.filter(e => !e.skipReviewRole);
+                    role.roles.forEach(item => {
+                        if (item.fields && typeof item.fields == 'string') {
+                            item.fields = JSON.parse(item.fields);
+                        }
+                    });
+                    if (role.fields && typeof role.fields == 'string') {
+                        role.fields = JSON.parse(role.fields);
+                    }
                     delete role._id;
                     delete role._metadata;
                     delete role.__v;
