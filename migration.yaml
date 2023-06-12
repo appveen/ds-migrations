@@ -33,7 +33,7 @@ spec:
             secretName: odp-sec
       containers:
         - name: migration
-          image: "appveen/odp-ds-migration:1.0.0"
+          image: "appveen/odp-datastack-migration:__VERSION__"
           ports:
             - containerPort: 10007
           volumeMounts:
