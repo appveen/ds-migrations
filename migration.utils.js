@@ -59,7 +59,17 @@ function convertDefinition(definition) {
 
 
 function enrichSchema(schema) {
-
+    schema.schemaFree = false;
+    schema.simpleDate = true;
+    schema.stateModel = {
+        attribute: "",
+        initialStates: [],
+        enabled: false
+    };
+    workflowConfig = {
+        enabled: false,
+        makerCheckers: []
+    };
 }
 
 

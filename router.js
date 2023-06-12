@@ -76,6 +76,7 @@ router.post('/migrate/securityKeys', async (req, res) => {
         });
     }
 });
+
 router.get('/migrate/dataService/log', async (req, res) => {
     res.sendFile(path.join(process.cwd(), 'logs', 'dataService.log'));
 });
@@ -103,11 +104,6 @@ router.post('/migrate/dataService', async (req, res) => {
                 let role = await conn.db(MONGODB_DATABASE).collection('userMgmt.roles').findOne({ _id: temp._id });
                 if (role) {
                     dsLogger.info('Copying Roles to Data Service:', temp._id);
-                    let skipReviewRole = role.roles.find(e => e.skipReviewRole);
-                    if (skipReviewRole) {
-                        SKIP_REVIEW_LIST.push({ serviceId: temp._id, skipPermId: skipReviewRole.id });
-                    }
-                    role.roles = role.roles.filter(e => !e.skipReviewRole);
                     role.roles.forEach(item => {
                         if (item.fields && typeof item.fields == 'string') {
                             item.fields = JSON.parse(item.fields);
@@ -183,7 +179,15 @@ router.post('/migrate/dataService', async (req, res) => {
             dsLogger.info('No Secure Text Found in any Data Service');
         }
         dsLogger.info('====================================================');
-        fs.writeFileSync(path.join(__dirname, 'roles', 'SKIP_REVIEW_ROLES.json'), JSON.stringify(SKIP_REVIEW_LIST));
+        dsLogger.info('Trying to migrate Workflows');
+        await migrateWorkflow();
+        dsLogger.info('Done!');
+        dsLogger.info('====================================================');
+        dsLogger.info('Trying to migrate Skip Review Role');
+        await migrateSkipReviewRole();
+        dsLogger.info('Done!');
+        dsLogger.info('====================================================');
+        dsLogger.info('All Data Migrated');
         res.status(200).json({ message: 'All Data Converted' });
     } catch (err) {
         logger.error(err);
@@ -228,7 +232,6 @@ router.post('/migrate/libraries', async (req, res) => {
     }
 });
 
-
 function generateMigrationCode(schema, definition, parentDef) {
     let code = [];
     if (definition && !_.isEmpty(definition)) {
@@ -257,5 +260,132 @@ function generateMigrationCode(schema, definition, parentDef) {
     return code;
 }
 
+
+async function migrateWorkflow() {
+    let client;
+    try {
+        fs.writeFileSync(path.join(process.cwd(), 'logs', 'workflow.log'), '');
+        const wfLogger = log4js.getLogger('workflow');
+        client = await MongoClient.connect(MONGODB_URL);
+        const serviceCol = client.db(MONGODB_DATABASE).collection('services');
+        const groupCol = client.db(MONGODB_DATABASE).collection('userMgmt.groups');
+        wfLogger.info('Fetching Data Service that has Review Enabled');
+        let docs = await serviceCol.find({ 'role.roles.operations.method': 'REVIEW' }).toArray();
+        wfLogger.info('Data Service with Review found:', docs.length);
+        let promises = docs.map(async (doc) => {
+            wfLogger.info('Running migration for the data service with review:', doc._id);
+            const mcId = 'C' + rand(10);
+            permissionIds[doc._id] = { newId: mcId, oldIds: [] };
+            try {
+                const roleIndexes = doc.role.roles.map((e, i) => {
+                    if (e.operations.find(eo => eo.method === 'REVIEW')) {
+                        permissionIds[doc._id].oldIds.push(e.id);
+                        oldPermissionIds.push(e.id);
+                        return i;
+                    }
+                }).filter(e => typeof e === 'number');
+                roleIndexes.reduce((prev, curr) => {
+                    const role = doc.role.roles[curr];
+                    role.operations = role.operations.filter(e => e.method !== 'REVIEW');
+                }, null);
+                wfLogger.info('Adding Workflow Configuration Data Service:', doc._id);
+                doc.workflowConfig = {
+                    enabled: true,
+                    makerCheckers: [
+                        {
+                            name: doc.name + ' Maker Checker',
+                            steps: [
+                                { id: mcId, name: 'Reviewer', approvals: 1 }
+                            ]
+                        }
+                    ]
+                }
+                return await serviceCol.findOneAndUpdate({ _id: doc._id }, { $set: { workflowConfig: doc.workflowConfig, role: doc.role } });
+            } catch (err) {
+                wfLogger.error(err);
+            }
+        });
+        await Promise.all(promises);
+
+        fs.writeFileSync(path.join(__dirname, 'data', 'WF_PERMISSION_ID.json'), JSON.stringify(permissionIds));
+
+        docs = await groupCol.find({ 'roles.id': { $in: oldPermissionIds } }).toArray();
+        promises = docs.map(async (doc) => {
+            try {
+                const newRoles = doc.roles.reduce((prev, curr) => {
+                    const perms = permissionIds[curr.entity];
+                    if (perms && perms.oldIds.indexOf(curr.id) > -1 && prev.findIndex(e => e.id == perms.newId) == -1) {
+                        const temp = JSON.parse(JSON.stringify(curr));
+                        temp.id = perms.newId;
+                        prev.push(temp);
+                    }
+                    return prev;
+                }, JSON.parse(JSON.stringify(doc.roles)));
+                return await groupCol.findOneAndUpdate({ _id: doc._id }, { $set: { roles: newRoles } });
+            } catch (err) {
+                wfLogger.error(err);
+            }
+        });
+        await Promise.all(promises);
+    } catch (err) {
+        logger.error(err);
+    }
+}
+
+
+async function migrateSkipReviewRole() {
+    let client;
+    try {
+        client = await MongoClient.connect(MONGODB_URL);
+        const serviceCol = client.db(MONGODB_DATABASE).collection('services');
+        const groupCol = client.db(MONGODB_DATABASE).collection('userMgmt.groups');
+
+        let docs = await serviceCol.find({ 'role.roles.operations.method': 'SKIP_REVIEW' }).toArray();
+        let promises = docs.map(async (doc) => {
+            const adminId = 'ADMIN_' + doc._id;
+            permissionIds[doc._id] = { newId: adminId, oldIds: [] };
+            try {
+                const roleIndexes = doc.role.roles.map((e, i) => {
+                    if (e.operations.find(eo => eo.method === 'SKIP_REVIEW')) {
+                        permissionIds[doc._id].oldIds.push(e.id);
+                        oldPermissionIds.push(e.id);
+                        return i;
+                    }
+                }).filter(e => typeof e === 'number');
+                roleIndexes.reverse().forEach(index => {
+                    doc.role.roles.splice(index, 1);
+                });
+                return await serviceCol.findOneAndUpdate({ _id: doc._id }, { $set: { role: doc.role } });
+            } catch (err) {
+                logger.error(err);
+            }
+        });
+        await Promise.all(promises);
+
+        fs.writeFileSync(path.join(__dirname, 'data', 'skip-review-permission-id.json'), JSON.stringify(permissionIds));
+
+        docs = await groupCol.find({ 'roles.id': { $in: oldPermissionIds } }).toArray();
+        fs.writeFileSync(path.join(__dirname, 'data', 'skip-review-permission-id-groups.json'), JSON.stringify(docs.map(e => e._id)));
+        promises = docs.map(async (doc) => {
+            try {
+                const newRoles = doc.roles.reduce((prev, curr) => {
+                    const perms = permissionIds[curr.entity];
+                    if (perms && perms.oldIds.indexOf(curr.id) > -1 && prev.findIndex(e => e.id == perms.newId) == -1) {
+                        const temp = JSON.parse(JSON.stringify(curr));
+                        temp.id = perms.newId;
+                        prev.push(temp);
+                    }
+                    return prev;
+                }, JSON.parse(JSON.stringify(doc.roles)));
+                return await groupCol.findOneAndUpdate({ _id: doc._id }, { $set: { roles: newRoles } });
+            } catch (err) {
+                logger.error(err);
+            }
+        });
+        await Promise.all(promises);
+    } catch (err) {
+        logger.error(err);
+    }
+}
 
 module.exports = router;
