@@ -35,7 +35,7 @@ spec:
         - name: migration
           image: "appveen/odp-datastack-migration:__VERSION__"
           ports:
-            - containerPort: 10007
+            - containerPort: 3000
           volumeMounts:
             - name: odp-sec
               mountPath: "/opt/keys"
