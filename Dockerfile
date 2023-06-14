@@ -9,6 +9,8 @@ COPY package.json package.json
 
 RUN npm install --no-audit
 
+COPY . .
+
 ENV NODE_ENV="production"
 
 EXPOSE 3000
