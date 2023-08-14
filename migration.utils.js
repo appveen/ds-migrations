@@ -66,7 +66,7 @@ function enrichSchema(schema) {
         initialStates: [],
         enabled: false
     };
-    workflowConfig = {
+    schema.workflowConfig = {
         enabled: false,
         makerCheckers: []
     };

@@ -11,12 +11,11 @@ const cipherUtils = require('./cipher.utils');
 const logger = log4js.getLogger('router');
 
 const ODP_NAMESPACE = process.env.ODP_NAMESPACE || 'capiot';
-const DATA_STACK_NAMESPACE = process.env.DATA_STACK_NAMESPACE || 'appveen';
+// const DATA_STACK_NAMESPACE = process.env.DATA_STACK_NAMESPACE || 'appveen';
 const MONGODB_URL = process.env.MONGO_AUTHOR_URL || 'mongodb://localhost:27017';
 const MONGODB_DATABASE = process.env.MONGO_AUTHOR_DBNAME || 'odpConfig';
 
 let SECURE_DS_LIST = [];
-let SKIP_REVIEW_LIST = [];
 
 router.get('/migrate/securityKeys/log', async (req, res) => {
     res.sendFile(path.join(process.cwd(), 'logs', 'securityKeys.log'));
@@ -40,7 +39,7 @@ router.post('/migrate/securityKeys', async (req, res) => {
                 secLogger.info('Trying to Decrypt Key');
                 curr.key = cipherUtils.odp.decrypt(curr.key, global.baseKey);
                 secLogger.info('Storing Key in File: ' + `${curr._id}.json`);
-                writeFileSync(path.join(__dirname, 'keys', `${curr._id}.json`), JSON.stringify(curr));
+                fs.writeFileSync(path.join(__dirname, 'keys', `${curr._id}.json`), JSON.stringify(curr));
                 secLogger.info('Trying to Encrypt Certificate Using ENCRYPTION_KEY');
                 curr.certificate = cipherUtils.datastack.encrypt(curr.certificate, global.ENCRYPTION_KEY);
                 secLogger.info('Trying to Encrypt Key Using ENCRYPTION_KEY');
@@ -81,6 +80,7 @@ router.get('/migrate/dataService/log', async (req, res) => {
     res.sendFile(path.join(process.cwd(), 'logs', 'dataService.log'));
 });
 router.post('/migrate/dataService', async (req, res) => {
+    let result = [];
     try {
         fs.writeFileSync(path.join(process.cwd(), 'logs', 'dataService.log'), '');
         const dsLogger = log4js.getLogger('dataService');
@@ -168,7 +168,7 @@ router.post('/migrate/dataService', async (req, res) => {
                     code.push('})();');
                     if (SECURE_DS_LIST.indexOf(curr._id) > -1) {
                         dsLogger.info('Code Genrated for secure text migration of :', curr._id);
-                        writeFileSync(path.join(__dirname, 'scripts', `${_.padStart(counter + '', 3, '0')}.${curr._id}.js`), code.join('\n'), 'utf8');
+                        fs.writeFileSync(path.join(__dirname, 'scripts', `${_.padStart(counter + '', 3, '0')}.${curr._id}.js`), code.join('\n'), 'utf8');
                     }
                 } catch (error) {
                     console.log(error);
@@ -263,6 +263,8 @@ function generateMigrationCode(schema, definition, parentDef) {
 
 async function migrateWorkflow() {
     let client;
+    let permissionIds = {};
+    let oldPermissionIds = [];
     try {
         fs.writeFileSync(path.join(process.cwd(), 'logs', 'workflow.log'), '');
         const wfLogger = log4js.getLogger('workflow');
@@ -335,6 +337,8 @@ async function migrateWorkflow() {
 
 async function migrateSkipReviewRole() {
     let client;
+    let permissionIds = {};
+    let oldPermissionIds = [];
     try {
         client = await MongoClient.connect(MONGODB_URL);
         const serviceCol = client.db(MONGODB_DATABASE).collection('services');
@@ -386,6 +390,12 @@ async function migrateSkipReviewRole() {
     } catch (err) {
         logger.error(err);
     }
+}
+
+function rand(index) {
+    const i = Math.pow(10, index - 1);
+    const j = Math.pow(10, index) - 1;
+    return Math.floor(Math.random() * (j - i + 1)) + i;
 }
 
 module.exports = router;

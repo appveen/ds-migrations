@@ -53,6 +53,7 @@ execSync('mkdir -p scripts');
                     code.push('const { MongoClient } = require(\'mongodb\');');
                     code.push('const _ = require(\'lodash\');');
                     code.push('const cipherUtils = require(\'../cipher.utils\');');
+                    code.push('const MONGODB_URL = process.env.MONGO_AUTHOR_URL || \'mongodb://localhost:27017\';');
 
                     code.push('(async () => {');
                     code.push('    let conn;');
