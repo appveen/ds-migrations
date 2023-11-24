@@ -21,10 +21,11 @@ log4js.configure({
 });
 
 try {
-
-    execSync('mkdir -p keys');
-    execSync('mkdir -p roles');
-    execSync('mkdir -p scripts');
+    if (process.env.NODE_ENV != 'production') {
+        execSync('mkdir -p keys');
+        execSync('mkdir -p roles');
+        execSync('mkdir -p scripts');
+    }
     if (process.env.NODE_ENV == 'production') {
         global.baseKey = fs.readFileSync('/opt/keys/odp.key', 'utf8');
         global.baseCert = fs.readFileSync('/opt/keys/odp.crt', 'utf8');
