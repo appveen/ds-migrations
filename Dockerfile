@@ -12,6 +12,7 @@ RUN npm install --no-audit
 RUN mkdir -p keys
 RUN mkdir -p roles
 RUN mkdir -p scripts
+RUN mkdir -p logs
 
 COPY . .
 

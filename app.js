@@ -5,7 +5,6 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const log4js = require('log4js');
-const { execSync } = require('child_process');
 
 const migrationUtils = require('./migration.utils');
 
@@ -16,16 +15,11 @@ const logger = log4js.getLogger('Server');
 const app = express();
 
 log4js.configure({
-    appenders: { 'out': { type: 'stdout' }, file: { type: 'multiFile', base: 'logs/', property: 'categoryName', extension: '.log', maxLogSize: 10485760, backups: 3, compress: true } },
-    categories: { default: { appenders: ['out', 'file'], level: LOG_LEVEL } }
+    appenders: { 'out': { type: 'stdout' } },
+    categories: { default: { appenders: ['out'], level: LOG_LEVEL } }
 });
 
 try {
-    if (process.env.NODE_ENV != 'production') {
-        execSync('mkdir -p keys');
-        execSync('mkdir -p roles');
-        execSync('mkdir -p scripts');
-    }
     if (process.env.NODE_ENV == 'production') {
         global.baseKey = fs.readFileSync('/opt/keys/odp.key', 'utf8');
         global.baseCert = fs.readFileSync('/opt/keys/odp.crt', 'utf8');
