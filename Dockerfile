@@ -16,7 +16,9 @@ RUN mkdir -p logs
 
 COPY . .
 
-RUN chmod 777 /tmp/app
+USER root
+
+RUN chmod -R 777 /tmp/app
 
 ENV NODE_ENV="production"
 
