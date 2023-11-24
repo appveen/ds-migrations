@@ -13,6 +13,7 @@ RUN mkdir -p keys
 RUN mkdir -p roles
 RUN mkdir -p scripts
 RUN mkdir -p logs
+RUN mkdir -p data
 
 COPY . .
 

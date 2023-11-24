@@ -104,7 +104,7 @@ router.post('/migrate/dataService', async (req, res) => {
                 let role = await conn.db(MONGODB_DATABASE).collection('userMgmt.roles').findOne({ _id: temp._id });
                 if (role) {
                     dsLogger.info('Copying Roles to Data Service:', temp._id);
-                    role.roles.forEach(item => {
+                    (role.roles || []).forEach(item => {
                         if (item.fields && typeof item.fields == 'string') {
                             item.fields = JSON.parse(item.fields);
                         }
