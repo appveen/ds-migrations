@@ -17,8 +17,6 @@ RUN mkdir -p data
 
 COPY . .
 
-USER root
-
 RUN chmod -R 777 /tmp/app
 
 ENV NODE_ENV="production"
